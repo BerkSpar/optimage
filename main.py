@@ -11,17 +11,20 @@ parser.add_argument('-f', action='store', dest='factor',type=float, help='factor
 
 args = parser.parse_args()
 
-factor = args.factor
-image_path = args.image_path
-destination_path = args.destination_path
-quality = args.quality
+try:
+  factor = args.factor
+  image_path = args.image_path
+  destination_path = args.destination_path
+  quality = args.quality
 
-foo = Image.open(args.image_path)
+  foo = Image.open(args.image_path)
 
-x, y = foo.size
-x2, y2 = math.floor(x/factor), math.floor(y/factor)
-foo = foo.resize((x2,y2),Image.ANTIALIAS)              
+  x, y = foo.size
+  x2, y2 = math.floor(x/factor), math.floor(y/factor)
+  foo = foo.resize((x2,y2),Image.ANTIALIAS)              
 
-foo.save(destination_path, optimize=True, quality=quality)
+  foo.save(destination_path, optimize=True, quality=quality)
 
-print('Done!')
+  print('Done!')
+except: 
+  print('There is an error. Try to type --help to know more about.')
